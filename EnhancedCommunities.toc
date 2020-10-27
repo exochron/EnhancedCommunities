@@ -1,0 +1,13 @@
+## Interface: 90001
+## Title: Enhanced Communities
+## Notes: Adds more features to the ingame communities
+## Author: eXochron
+## Version: @project-version@
+# SavedVariables: EnhancedCommunitiesSettings
+# X-Curse-Project-ID: ---
+
+core.lua
+resize.lua
+roster_buttons.lua
+dynamic_title.lua
+chat.lua
