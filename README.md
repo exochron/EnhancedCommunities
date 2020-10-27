@@ -24,4 +24,5 @@ This is an interface addon for World of Warcraft, which adds more UI features to
     => /run CommunitiesFrame.CommunitiesList:SetPoint("BOTTOMRIGHT",CommunitiesFrame,"BOTTOMLEFT",70,29)
 - option in chat dropdown to select member in roster
 - copy from chat
+- full channel list in chat side bar (over/under member list) instead of dropdownmenu
 - group chars by GRM alts
