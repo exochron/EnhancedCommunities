@@ -10,6 +10,8 @@ frame:RegisterEvent("PLAYER_LOGIN")
 frame:RegisterEvent("ADDON_LOADED")
 frame:SetScript("OnEvent", function(self, event, arg1)
     if CommunitiesFrame then
+        EnhancedCommunitiesSettings = EnhancedCommunitiesSettings or {}
+
         frame:UnregisterEvent("PLAYER_LOGIN")
         frame:UnregisterEvent("ADDON_LOADED")
 

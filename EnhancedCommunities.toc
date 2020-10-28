@@ -3,7 +3,7 @@
 ## Notes: Adds more features to the ingame communities
 ## Author: eXochron
 ## Version: @project-version@
-# SavedVariables: EnhancedCommunitiesSettings
+## SavedVariablesPerCharacter: EnhancedCommunitiesSettings
 # X-Curse-Project-ID: ---
 
 core.lua

@@ -1,10 +1,8 @@
 local _, ADDON = ...
 
--- todo build button
--- todo save state
 -- todo fix frames (GuildPerks, MemberLists)
 
-local autohide = true
+local autohide
 
 local function hide()
     local list = CommunitiesFrame.CommunitiesList
@@ -38,8 +36,29 @@ local function show()
 end
 local function buildButton()
     local button = CreateFrame("Button", nil, CommunitiesFrame)
-    button:SetSize(20, 20)
-    button:SetPoint("BOTTOMLEFT")
+    button:SetSize(25, 25)
+    button:SetPoint("TOP", CommunitiesFrame.CommunitiesList.ListScrollFrame.scrollDown, "BOTTOM", 0, 1)
+    button:SetHighlightTexture("Interface\\BUTTONS\\UI-Common-MouseHilight")
+    if autohide then
+        button:SetNormalTexture("Interface\\BUTTONS\\UI-SpellbookIcon-NextPage-Up")
+        button:SetPushedTexture("Interface\\BUTTONS\\UI-SpellbookIcon-NextPage-Down")
+    else
+        button:SetNormalTexture("Interface\\BUTTONS\\UI-SpellbookIcon-PrevPage-Up")
+        button:SetPushedTexture("Interface\\BUTTONS\\UI-SpellbookIcon-PrevPage-Down")
+    end
+    button:SetScript("OnMouseUp", function (self)
+        autohide = not autohide
+        if autohide then
+            hide()
+            self:SetNormalTexture("Interface\\BUTTONS\\UI-SpellbookIcon-NextPage-Up")
+            self:SetPushedTexture("Interface\\BUTTONS\\UI-SpellbookIcon-NextPage-Down")
+        else
+            show()
+            self:SetNormalTexture("Interface\\BUTTONS\\UI-SpellbookIcon-PrevPage-Up")
+            self:SetPushedTexture("Interface\\BUTTONS\\UI-SpellbookIcon-PrevPage-Down")
+        end
+        EnhancedCommunitiesSettings.autohideCommunitiesList = autohide
+    end)
 
     return button
 end
@@ -72,6 +91,8 @@ local function fixPoints()
 end
 
 ADDON:OnLoad(function()
+    autohide = EnhancedCommunitiesSettings.autohideCommunitiesList or false
+
     fixPoints()
     buildButton()
 

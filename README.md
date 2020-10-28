@@ -7,11 +7,13 @@ This is an interface addon for World of Warcraft, which adds more UI features to
 - replaced roster menu switch with buttons
 - dynamic community name in title
 - time in chat
+- autohide sidebar to display only icons in communities list
 
 ### TODOs
-- fix Bg in left sidebar
-- save size
-- community icon for roster buttons
+- resize: fix Bg in left sidebar
+- resize: save size
+- roster buttons: community icon for roster
+- autohide: fix points in GildPerks and Memberlist
 
 ### Planned
 
@@ -20,8 +22,6 @@ This is an interface addon for World of Warcraft, which adds more UI features to
 - edit columns in roster
 - reorder communities in sidebar
 - shrink communities in sidebar (smaller height)
-- toggle/autohide sidebar to display only icons in communities list
-    => /run CommunitiesFrame.CommunitiesList:SetPoint("BOTTOMRIGHT",CommunitiesFrame,"BOTTOMLEFT",70,29)
 - option in chat dropdown to select member in roster
 - copy from chat
 - full channel list in chat side bar (over/under member list) instead of dropdownmenu
