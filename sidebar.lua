@@ -1,6 +1,6 @@
 local _, ADDON = ...
 
--- todo fix frames (GuildPerks, MemberLists)
+-- todo fix frames (MemberLists)
 
 local autohide
 
@@ -38,26 +38,19 @@ local function buildButton()
     local button = CreateFrame("Button", nil, CommunitiesFrame)
     button:SetSize(25, 25)
     button:SetPoint("TOP", CommunitiesFrame.CommunitiesList.ListScrollFrame.scrollDown, "BOTTOM", 0, 1)
-    button:SetHighlightTexture("Interface\\BUTTONS\\UI-Common-MouseHilight")
-    if autohide then
-        button:SetNormalTexture("Interface\\BUTTONS\\UI-SpellbookIcon-NextPage-Up")
-        button:SetPushedTexture("Interface\\BUTTONS\\UI-SpellbookIcon-NextPage-Down")
-    else
-        button:SetNormalTexture("Interface\\BUTTONS\\UI-SpellbookIcon-PrevPage-Up")
-        button:SetPushedTexture("Interface\\BUTTONS\\UI-SpellbookIcon-PrevPage-Down")
-    end
-    button:SetScript("OnMouseUp", function (self)
+    button:SetHighlightTexture(130757) -- Interface\BUTTONS\UI-Common-MouseHilight
+    button:SetPushedTexture(autohide and 130865 or 130868) -- Interface\BUTTONS\UI-SpellbookIcon-NextPage-Down
+    button:SetNormalTexture(autohide and 130866 or 130869) -- Interface\BUTTONS\UI-SpellbookIcon-NextPage-Up
+    button:SetScript("OnMouseUp", function(self)
         autohide = not autohide
+        button:SetPushedTexture(autohide and 130865 or 130868)
+        button:SetNormalTexture(autohide and 130866 or 130869)
+        EnhancedCommunitiesSettings.autohideCommunitiesList = autohide
         if autohide then
             hide()
-            self:SetNormalTexture("Interface\\BUTTONS\\UI-SpellbookIcon-NextPage-Up")
-            self:SetPushedTexture("Interface\\BUTTONS\\UI-SpellbookIcon-NextPage-Down")
         else
             show()
-            self:SetNormalTexture("Interface\\BUTTONS\\UI-SpellbookIcon-PrevPage-Up")
-            self:SetPushedTexture("Interface\\BUTTONS\\UI-SpellbookIcon-PrevPage-Down")
         end
-        EnhancedCommunitiesSettings.autohideCommunitiesList = autohide
     end)
 
     return button
@@ -67,27 +60,7 @@ local function fixPoints()
     list.BottomFiligree:ClearAllPoints()
     list.BottomFiligree:SetPoint("BOTTOM", 0, 1)
 
-    local GuildInfo = CommunitiesFrame.GuildDetailsFrame.Info
-    GuildInfo:SetPoint("RIGHT", CommunitiesFrame.GuildDetailsFrame.News, "LEFT", -18, 0)
-    GuildInfo.DetailsFrame:SetPoint("BOTTOMRIGHT", -11, 0)
-    GuildInfo.MOTDScrollFrame:SetPoint("RIGHT", -11, 0)
-    GuildInfo.Header1:SetPoint("RIGHT", 11, 0)
-    CommunitiesFrameGuildDetailsFrameInfoHeader2:SetPoint("RIGHT", 11, 0)
-    CommunitiesFrameGuildDetailsFrameInfoHeader3:SetPoint("RIGHT", 11, 0)
-    CommunitiesFrameGuildDetailsFrameInfoBar2Left:SetPoint("TOP", GuildInfo.MOTDScrollFrame, "BOTTOM", 0, 0)
-
-    -- find guild info challenges bg
-    for _, v in ipairs({GuildInfo:GetRegions()}) do
-        if v.GetTexture and v:GetTexture() == "Interface\\GuildFrame\\GuildChallenges" then
-            v:SetPoint("RIGHT", 11, 0)
-        end
-    end
-    for i, challenge in ipairs(GuildInfo.Challenges) do
-        challenge:SetPoint("RIGHT", 11, 0)
-        if i > 1 then
-            challenge:SetPoint("LEFT", GuildInfo.Challenges[i-1], "LEFT")
-        end
-    end
+    list.FilligreeOverlay.LeftBar:SetPoint("BOTTOMLEFT", list.FilligreeOverlay.BLCorner, "TOPLEFT")
 end
 
 ADDON:OnLoad(function()

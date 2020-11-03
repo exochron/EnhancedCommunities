@@ -7,6 +7,8 @@
 # X-Curse-Project-ID: ---
 
 core.lua
+fix_points.lua
+
 resize.lua
 roster_buttons.lua
 dynamic_title.lua

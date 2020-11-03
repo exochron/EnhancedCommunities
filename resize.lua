@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON = ...
+local _, ADDON = ...
 
 -- TODO fix left Bg
 -- TODO save size
@@ -12,18 +12,6 @@ local function updateLists()
 
     HybridScrollFrame_CreateButtons(CommunitiesFrame.GuildBenefitsFrame.Rewards.RewardsContainer, "CommunitiesGuildRewardsButtonTemplate", 1, 0)
     CommunitiesFrame.GuildBenefitsFrame.Rewards.RewardsContainer.update()
-end
-
-local function fixUIPoints()
-    local CF = CommunitiesFrame
-    CF.CommunitiesList.FilligreeOverlay.LeftBar:SetPoint("BOTTOMLEFT", CF.CommunitiesList.FilligreeOverlay.BLCorner, "TOPLEFT")
-
-    CF.GuildDetailsFrame.News.Container:SetPoint("BOTTOM", CF.GuildDetailsFrame.News)
-    CF.GuildBenefitsFrame.Rewards.RewardsContainer.ScrollChild:SetPoint("BOTTOM", CF.GuildBenefitsFrame.Rewards.RewardsContainer)
-
-    local bg = CommunitiesFrame.CommunitiesList.Bg
-    --CommunitiesFrame.CommunitiesList.Bg:SetHorizTile(true)
-    --CommunitiesFrame.CommunitiesList.Bg:SetVertTile(true)
 end
 
 local function buildDrag()
@@ -59,8 +47,6 @@ local function buildDrag()
     end)
 
     drag:Show()
-
-    fixUIPoints()
 end
 
 ADDON:OnLoad(buildDrag)
